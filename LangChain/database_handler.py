@@ -5,9 +5,9 @@ import pandas as pd
 
 class DatabaseHandler:
     def __init__(self):
-        self.data_root = './dataset'
-        if os.path.isfile('./dataset/original.csv'):
-            self.db = pd.read_csv('./dataset/original.csv')
+        self.data_root = 'LangChain/dataset'
+        if os.path.isfile(f'{self.data_root}/enroll_db.csv'):
+            self.db = pd.read_csv(f'{self.data_root}/enroll_db.csv')
         else:
             self.db = pd.DataFrame(columns=['id', 'paper_name', 'to_vector'])
 
@@ -15,7 +15,7 @@ class DatabaseHandler:
         # columns = id, paper_name, to_vector(true/false)
 
         # dataset 폴더 내에서 확장자가 .pdf인 파일만 가져오기
-        papers = [paper for paper in os.listdir(self.data_root) if paper.endswith('.pdf')]
+        papers = [paper for paper in os.listdir(f'{self.data_root}/raw_data') if paper.endswith('.pdf')]
         update_papers = []
 
         # 파일 목록에서 paper_name과 비교할 때 모두 소문자로 통일
@@ -44,7 +44,7 @@ class DatabaseHandler:
 
             max_id += 1
 
-        self.db.to_csv(f'{self.data_root}/original.csv', index=False)
+        self.db.to_csv(f'{self.data_root}/enroll_db.csv', index=False)
         print("데이터베이스가 업데이트되었습니다.")
 
 
