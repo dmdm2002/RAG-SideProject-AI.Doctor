@@ -8,8 +8,9 @@ from LangChain.vector_store import VectorStore
 
 class RAGChinBuilder:
     def __init__(self):
-        # self.llm = ChatOllama(model="llama3", temperature=0)
-        self.llm = ChatOpenAI(model="gpt-3.5-turbo")
+        self.llm = ChatOllama(model="llama3.2:1b", temperature=0)
+        # self.llm = ChatOpenAI(model="gpt-3.5-turbo")
+        self.vision = ChatOpenAI(model="")
         self.vector_store = VectorStore()
         self.retriever = self.vector_store.query_vector_store()
 
